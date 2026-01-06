@@ -51,7 +51,7 @@ export class Person {
     }
 
     toString() {
-        return `Person ${this.#name}, ${this.#lastname1}, ${this.#lastname2}, ${this.#born}, ${this.#picture}}`
+        return `Person ${this.#name}, ${this.#lastname1}, ${this.#lastname2}, ${this.#born}, ${this.#picture}}`;
     }
 }
 
