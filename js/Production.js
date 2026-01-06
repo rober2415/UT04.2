@@ -1,13 +1,13 @@
 "use strict";
 
 export class Production {
-    #title;
-    #nationality;
-    #publication;
-    #synopsis;
-    #image;
+    #title; // Título de la producción.
+    #nationality; // Define la nacionalidad de la producción.
+    #publication; // Fecha de publicación de la producción.
+    #synopsis; // Resumen del contenido de la producción.
+    #image; // String con la ruta donde está ubicada la imagen.
 
-    constructor(title, nationality = "Sin nacionalidad", publication, synopsis = "Sin sinopsis", image = "") {
+    constructor(title, nationality = "Sin nacionalidad", publication, synopsis = "Sin sinopsis", image = "Sin imagen") {
         this.title = title;
         this.nationality = nationality;
         this.publicaction = publication;
