@@ -4,7 +4,7 @@ export class Resource {
     #duration; // Nº de minutos de la película.
     #link; // Ruta donde se ubica el recurso.
 
-    constructor() {
+    constructor(duration, link) {
         this.duration = duration;
         this.link = link;
     }
