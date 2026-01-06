@@ -7,7 +7,7 @@ export class Person {
     #born; // Fecha de nacimiento.
     #picture; // String con la ruta donde está ubicada la imagen.
 
-    constructor(name, lastname1, lastname2, born, picture) {
+    constructor(name, lastname1, lastname2="", born, picture="Sin imagen") {
         this.name = name;
         this.lastname1 = lastname1;
         this.lastname2 = lastname2;
