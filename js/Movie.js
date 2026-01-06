@@ -7,7 +7,7 @@ export class Movie extends Production {
     #locations; // Array con diferentes ubicaciones donde transcurre la película.
 
     constructor(title, nationality = "Sin nacionalidad", publication, synopsis = "Sin sinopsis", image = "Sin imagen", resource = null, locations = []) {
-        super(title, nationality, publication, synopsis, image,);
+        super(title, nationality, publication, synopsis, image);
         this.resource = resource;
         this.locations = locations;
     }
