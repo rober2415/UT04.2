@@ -3,9 +3,9 @@
 import { Production } from "./Production";
 
 export class Serie extends Production {
-    #resources;
-    #locations;
-    #seasons;
+    #resources; // Array de Recursos con el contenido de los episodios.
+    #locations; // Array con diferentes ubicaciones donde transcurre la película.
+    #seasons; // Número de temporadas.
 
     constructor(title, nationality = "Sin nacionalidad", publication, synopsis = "Sin sinopsis", image = "Sin imagen", resources = null, locations = [], seasons) {
         super(title, nationality, publication, synopsis, image);
