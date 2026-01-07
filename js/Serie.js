@@ -1,6 +1,6 @@
 "use strict";
 
-import { Production } from "./Production";
+import { Production } from "./Production.js";
 
 export class Serie extends Production {
     #resources; // Array de Recursos con el contenido de los episodios.

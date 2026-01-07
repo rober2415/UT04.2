@@ -1,6 +1,6 @@
 "use strict";
 
-import { Production } from "./Production";
+import { Production } from "./Production.js";
 
 export class Movie extends Production {
     #resource; // Recurso con el contenido de la película.
