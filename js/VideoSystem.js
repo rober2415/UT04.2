@@ -263,6 +263,35 @@ class VideoSystem {
     // Number con el nº de elementos
     return this.#actors.size;
   }
+
+  /**
+   * Devuelve un iterador que permite recorrer 
+   * los directores registrados en el sistema
+   */
+  get directors() {
+    return this.#directors;
+  }
+
+  /**
+   * Añade un nuevo director
+   */
+  addDirector(...directors) {
+    for (const director of directors) {
+      // Tipo inválido
+      if (!(director instanceof Person)) {
+        throw new InvalidTypeException("Person");
+      }
+      // Ya registrado
+      if (this.#directors.has(director)) {
+        throw new RegisteredException("director");
+      }
+      // Añadir director
+      this.#directors.set(director, new Set());
+    }
+    //Number con el nº de elementos
+    return this.#directors.size;
+  }
+
 }
 
 
