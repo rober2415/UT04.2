@@ -9,15 +9,29 @@ export class Exception extends Error {
 }
 
 // Excepción vacío
-export class EmptyException extends Exception {
+export class EmptyValueException extends Exception {
     constructor() {
-        super("Error: El nombre no puede estar vacio.");
+        super(`Error: El valor no puede estar vacio.`);
     }
 }
 
 // Excepción tipo
-class InvalidTypeException extends Exception {
+export class InvalidTypeException extends Exception {
     constructor(expectedType) {
         super(`Error: Solo se admiten objetos del tipo ${expectedType}`);
+    }
+}
+
+// Excepción ya existe
+export class RegisteredException extends Exception {
+    constructor(expectedType) {
+        super(`Error: la categoría ya existe`);
+    }
+}
+
+// Excepción no registrado
+export class NotRegisteredException extends Exception {
+    constructor(expectedType) {
+        super(`Error: la categoría no existe`);
     }
 }

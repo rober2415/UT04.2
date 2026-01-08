@@ -4,7 +4,7 @@ import { VideoSystem } from "./VideoSystem.js";
 import { Category } from "./Category.js";
 
 export function testApp() {
-    // Instancia singleton
+    // Instanacia singleton
     const nuevaInstancia = VideoSystem.getInstance("Nueva");
     const nuevaInstancia2 = VideoSystem.getInstance("nueva2");
 
@@ -13,14 +13,27 @@ export function testApp() {
     console.log(`Nombre de la instancia 2: ${nuevaInstancia2.name}`);
 
     // Crear categorías
-    const cat1 = new Category("Acción", "Películas de acción");
-    const cat2 = new Category("Drama")
+    const cat1 = new Category("Categoría1", "Descripción categoría1");
+    const cat2 = new Category("Categoría2")
     nuevaInstancia.addCategory(cat1);
     nuevaInstancia.addCategory(cat2);
 
     // Muestro categorías
     for (const cat of nuevaInstancia.categories) {
-        console.log(cat.name, cat.description);
+        console.log(cat);
+    }
+
+    // Errores categorías
+    try {
+        nuevaInstancia.addCategory("notcategory");
+    } catch (error) {
+        console.error(error.message);
+    }
+
+    try {
+        nuevaInstancia.addCategory(cat1);
+    } catch (error) {
+        console.error(error.message);
     }
 
 }
