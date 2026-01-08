@@ -186,18 +186,18 @@ export function testApp() {
         console.error("Error removeActor no existe: ", error.message);
     }
 
-    // addActor
+    // addDirector
     const director1 = new Person("Nombre1", "Primer Apellido1", "Segundo Apellido1", new Date(2001, 10, 10), "Sin imagen");
     const director2 = new Person("Nombre2", "Primer Apellido2", "Segundo Apellido2", new Date(2002, 10, 10), "Sin imagen");
     nuevaInstancia.addDirector(director1);
     nuevaInstancia.addDirector(director2);
 
-    // Muestro los actores
+    // Muestro los directores
     for (const director of nuevaInstancia.directors) {
         console.log(director);
     }
 
-    // Errores addActor
+    // Errores addDirector
     try {
         nuevaInstancia.addDirector("nottype");
     } catch (error) {
@@ -208,6 +208,26 @@ export function testApp() {
         nuevaInstancia.addDirector(director1);
     } catch (error) {
         console.error("Error addDirector ya existe: ", error.message);
+    }
+
+    // removeDirector
+    nuevaInstancia.removeDirector(director1);
+
+    // Muestro los directores
+    for (const director of nuevaInstancia.directors) {
+        console.log(director);
+    }
+
+    // Errores removeDirector
+    try {
+        nuevaInstancia.removeDirector("notdirector");
+    } catch (error) {
+        console.error("Error removeDirector tipo: ", error.message);
+    }
+    try {
+        nuevaInstancia.removeDirector(director1);
+    } catch (error) {
+        console.error("Error removeDirector no existe: ", error.message);
     }
 
 }

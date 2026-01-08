@@ -291,6 +291,25 @@ class VideoSystem {
     //Number con el nº de elementos
     return this.#directors.size;
   }
+  /**
+   * Elimina un director del sistema
+   */
+  removeDirector(...directors) {
+    for (const director of directors) {
+      // Tipo inválido
+      if (!(director instanceof Person)) {
+        throw new InvalidTypeException("Person");
+      }
+      // No registrado
+      if (!this.#directors.has(director)) {
+        throw new NotRegisteredException("director");
+      }
+      // Eliminar director
+      this.#directors.delete(director)
+    }
+    // Number con el nº de elementos
+    return this.#directors.size;
+  }
 
 }
 
