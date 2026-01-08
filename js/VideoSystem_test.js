@@ -4,6 +4,7 @@ import { VideoSystem } from "./VideoSystem.js";
 import { Category } from "./Category.js";
 import { User } from "./User.js";
 import { Production } from "./Production.js";
+import { Person } from "./Person.js";
 
 export function testApp() {
     // Instanacia singleton
@@ -141,6 +142,29 @@ export function testApp() {
         console.error("Error removeProduction no existe: ", error.message);
     }
 
+    // addActor
+    const actor1 = new Person("Nombre1", "Primer Apellido1", "Segundo Apellido1", new Date(2001, 10, 10), "Sin imagen");
+    const actor2 = new Person("Nombre2", "Primer Apellido2", "Segundo Apellido2", new Date(2002, 10, 10), "Sin imagen");
+    nuevaInstancia.addActor(actor1);
+    nuevaInstancia.addActor(actor2);
+
+    // Muestro los actores
+    for (const actor of nuevaInstancia.actors) {
+        console.log(actor);
+    }
+
+    // Errores addActor
+    try {
+        nuevaInstancia.addActor("nottype");
+    } catch (error) {
+        console.error("Error addActor tipo: ", error.message);
+    }
+
+    try {
+        nuevaInstancia.addActor(actor1);
+    } catch (error) {
+        console.error("Error addActor ya existe: ", error.message);
+    }
 }
 
 window.onload = testApp;

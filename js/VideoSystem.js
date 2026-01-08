@@ -10,6 +10,7 @@ import {
 import { Category } from "./Category.js";
 import { User } from "./User.js";
 import { Production } from "./Production.js";
+import { Person } from "./Person.js";
 
 class VideoSystem {
   // Propiedad para almacenar la instancia
@@ -213,6 +214,34 @@ class VideoSystem {
     }
     // Number con el nº de elementos
     return this.#productions.size;
+  }
+
+  /**
+   * Devuelve un iterador que permite 
+   * recorrer los actores registrados en el sistema
+   */
+  get actors() {
+    return this.#actors;
+  }
+
+  /**
+   * Añade un nuevo actor
+   */
+  addActor(...actors) {
+    for (const actor of actors) {
+      // Tipo inválido
+      if (!(actor instanceof Person)) {
+        throw new InvalidTypeException("Person");
+      }
+      // Ya registrado
+      if (this.#actors.has(actor)) {
+        throw new RegisteredException("actor");
+      }
+      // Añadir categoría
+      this.#actors.set(actor, new Set());
+    }
+    //Number con el nº de elementos
+    return this.#actors.size;
   }
 
 }
