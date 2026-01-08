@@ -112,14 +112,35 @@ export function testApp() {
     try {
         nuevaInstancia.addProduction("notproduction");
     } catch (error) {
-        console.error(error.message);
+        console.error("Error addProduction tipo: ", error.message);
     }
 
     try {
         nuevaInstancia.addProduction(production1);
     } catch (error) {
-        console.error(error.message);
+        console.error("Error addProduction ya existe: ", error.message);
     }
+
+    // removeProduction
+    nuevaInstancia.removeProduction(production1);
+
+    // Muestro produciones
+    for (const production of nuevaInstancia.productions) {
+        console.log("Produciones después de borrar", production);
+    }
+
+    // Errores removeProduction
+    try {
+        nuevaInstancia.removeProduction("notproduction");
+    } catch (error) {
+        console.error("Error removeProduction tipo: ", error.message);
+    }
+    try {
+        nuevaInstancia.removeProduction(production1);
+    } catch (error) {
+        console.error("Error removeProduction no existe: ", error.message);
+    }
+
 }
 
 window.onload = testApp;

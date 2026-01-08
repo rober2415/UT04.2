@@ -195,6 +195,26 @@ class VideoSystem {
     return this.#productions.size;
   }
 
+  /**
+   * Elimina una producción del sistema
+   */
+  removeProduction(...productions) {
+    for (const production of productions) {
+      // Tipo inválido
+      if (!(production instanceof Production)) {
+        throw new InvalidTypeException("Production");
+      }
+      // No registrado
+      if (!this.#productions.has(production)) {
+        throw new NotRegisteredException("producción");
+      }
+      // Eliminar producción
+      this.#productions.delete(production);
+    }
+    // Number con el nº de elementos
+    return this.#productions.size;
+  }
+
 }
 
 
