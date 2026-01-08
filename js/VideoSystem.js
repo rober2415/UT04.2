@@ -8,6 +8,7 @@ import {
 } from "./Exception.js";
 
 import { Category } from "./Category.js";
+import { User } from "./User.js";
 
 class VideoSystem {
   // Propiedad para almacenar la instancia
@@ -18,12 +19,14 @@ class VideoSystem {
 
   // Colecciones
   #categories = new Map();
-
-  #productions = new Set();
-  #users = new Set();
   #actors = new Map();
   #directors = new Map();
 
+  // Conjuntos
+  #users = new Set();
+  #productions = new Set();
+
+  // Categoría por defecto
   #defaultCategory = new Category("Por defecto", "Categoría por defecto");
 
   /**
@@ -53,7 +56,7 @@ class VideoSystem {
   }
 
   /**
-   * Getter y Setter name
+   * Devuelve el nombre del sistema
    */
   get name() {
     return this.#name;
@@ -66,7 +69,7 @@ class VideoSystem {
   }
 
   /**
-   * Getter categories
+   * Devuelve un iterador que permite recorrer las categorías del sistema
    */
   get categories() {
     return this.#categories;
@@ -83,7 +86,7 @@ class VideoSystem {
       }
       // Ya registrado
       if (this.#categories.has(cat)) {
-        throw new RegisteredException();
+        throw new RegisteredException("categoria");
       }
       // Añadir categoría
       this.#categories.set(cat, new Set());
@@ -114,6 +117,36 @@ class VideoSystem {
     // Number con el nº de elementos
     return this.#categories.size;
   }
+
+  /**
+   * Devuelve un iterador que permite recorrer los usuarios del sistema 
+   */
+  get users() {
+    return this.#users;
+  }
+
+  /**
+   * Añade un nuevo usuario
+   */
+  addUser(...users) {
+    for (const user of users) {
+      // Tipo inválido
+      if (!(user instanceof User)) {
+        throw new InvalidTypeException("User");
+      }
+      // Ya registrado
+      for (const u of this.#users) {
+        if (u.name === user.name || u.email === user.email) {
+          throw new RegisteredException("usuario");
+        }
+      }
+      // Añadir usuario
+      this.#users.add(user);
+    }
+    // Number con el nº de elementos
+    return this.#users.size;
+  }
+  
 }
 
 

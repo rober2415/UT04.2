@@ -25,7 +25,7 @@ export class InvalidTypeException extends Exception {
 // Excepción ya existe
 export class RegisteredException extends Exception {
     constructor(expectedType) {
-        super(`Error: la categoría ya existe.`);
+        super(`Error: el/la ${expectedType} ya existe.`);
     }
 }
 
