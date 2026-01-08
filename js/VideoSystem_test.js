@@ -3,6 +3,7 @@
 import { VideoSystem } from "./VideoSystem.js";
 import { Category } from "./Category.js";
 import { User } from "./User.js";
+import { Production } from "./Production.js";
 
 export function testApp() {
     // Instanacia singleton
@@ -96,7 +97,29 @@ export function testApp() {
         console.error(error.message);
     }
 
+    // addProduction
+    const production1 = new Production("Titulo1", "Nacionalidad1", new Date(2001, 10, 10), "Sinopsis1", "Sin imagen");
+    const production2 = new Production("Titulo2", "Nacionalidad2", new Date(2002, 10, 10), "Sinopsis2", "Sin imagen");
+    nuevaInstancia.addProduction(production1);
+    nuevaInstancia.addProduction(production2);
 
+    // Muestro producciones
+    for (const production of nuevaInstancia.productions) {
+        console.log(production);
+    }
+
+    // Errores addProduction
+    try {
+        nuevaInstancia.addProduction("notproduction");
+    } catch (error) {
+        console.error(error.message);
+    }
+
+    try {
+        nuevaInstancia.addProduction(production1);
+    } catch (error) {
+        console.error(error.message);
+    }
 }
 
 window.onload = testApp;

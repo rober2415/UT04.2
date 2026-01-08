@@ -9,6 +9,7 @@ import {
 
 import { Category } from "./Category.js";
 import { User } from "./User.js";
+import { Production } from "./Production.js";
 
 class VideoSystem {
   // Propiedad para almacenar la instancia
@@ -165,6 +166,33 @@ class VideoSystem {
     }
     // Number con el nº de elementos
     return this.#users.size;
+  }
+
+  /**
+   * Devuelve un iterador que permite recorrer las producciones del sistema
+   */
+  get productions() {
+    return this.#productions;
+  }
+
+  /**
+   * Añade una nueva producción
+   */
+  addProduction(...productions) {
+    for (const production of productions) {
+      // Tipo inválido
+      if (!(production instanceof Production)) {
+        throw new InvalidTypeException("Production");
+      }
+      // Ya registrado     
+      if (this.#productions.has(production)) {
+        throw new RegisteredException("producción");
+      }
+      // Añadir producción
+      this.#productions.add(production);
+    }
+    // Number con el nº de elementos
+    return this.#productions.size;
   }
 
 }
