@@ -32,6 +32,6 @@ export class RegisteredException extends Exception {
 // Excepción no registrado
 export class NotRegisteredException extends Exception {
     constructor(expectedType) {
-        super(`Error: la categoría no existe.`);
+        super(`Error: el/la ${expectedType} no existe.`);
     }
 }

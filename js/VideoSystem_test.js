@@ -54,26 +54,48 @@ export function testApp() {
 
     // addUser
     const user1 = new User("usuario1", "email1", "password1");
+    const user2 = new User("usuario2", "email2", "password2");
     nuevaInstancia.addUser(user1);
-    
+    nuevaInstancia.addUser(user2);
 
     // Muestro usuarios
     for (const user of nuevaInstancia.users) {
-        console.log(user);
+        console.log("Usuarios después de añadir", user);
     }
 
     // Errores addUser
     try {
-        nuevaInstancia.addUser("notuser")
+        nuevaInstancia.addUser("notuser");
     } catch (error) {
         console.error(error.message);
     }
 
     try {
         nuevaInstancia.addUser(user1);
-        } catch (error) {
+    } catch (error) {
         console.error(error.message);
     }
+
+    // removeUser
+    nuevaInstancia.removeUser(user1);
+
+    // Muestro usuarios
+    for (const user of nuevaInstancia.users) {
+        console.log("Usuarios después de borrar", user);
+    }
+
+    // Errores removeUser
+    try {
+        nuevaInstancia.removeUser("notuser");
+    } catch (error) {
+        console.error("Error removeUser tipo: ", error.message);
+    }
+    try {
+        nuevaInstancia.removeUser(user1);
+    } catch (error) {
+        console.error(error.message);
+    }
+
 
 }
 

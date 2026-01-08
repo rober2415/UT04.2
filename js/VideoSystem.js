@@ -72,7 +72,7 @@ class VideoSystem {
    * Devuelve un iterador que permite recorrer las categorías del sistema
    */
   get categories() {
-    return this.#categories;
+    return this.#categories.keys();
   }
 
   /**
@@ -103,7 +103,7 @@ class VideoSystem {
     for (const cat of categories) {
       // No registrado
       if (!this.#categories.has(cat)) {
-        throw new NotRegisteredException();
+        throw new NotRegisteredException("categoria");
       }
       // Mover producciones a la categoría por defecto antes de eliminar
       const productions = this.#categories.get(cat);
@@ -135,8 +135,8 @@ class VideoSystem {
         throw new InvalidTypeException("User");
       }
       // Ya registrado
-      for (const u of this.#users) {
-        if (u.name === user.name || u.email === user.email) {
+      for (const u of this.#users.values()) {
+        if (u.username === user.username || u.email === user.email) {
           throw new RegisteredException("usuario");
         }
       }
@@ -146,7 +146,27 @@ class VideoSystem {
     // Number con el nº de elementos
     return this.#users.size;
   }
-  
+
+  /**
+   * Elimina un usuario del sistema
+   */
+  removeUser(...users) {
+    for (const user of users) {
+      // Tipo inválido
+      if (!(user instanceof User)) {
+        throw new InvalidTypeException("User");
+      }
+      // No registrado
+      if (!this.#users.has(user)) {
+        throw new NotRegisteredException("usuario");
+      }
+      // Eliminar categoría
+      this.#users.delete(user);
+    }
+    // Number con el nº de elementos
+    return this.#users.size;
+  }
+
 }
 
 
