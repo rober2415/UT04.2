@@ -12,7 +12,7 @@ export function testApp() {
     console.log(`Nombre de la instancia 1: ${nuevaInstancia.name}`);
     console.log(`Nombre de la instancia 2: ${nuevaInstancia2.name}`);
 
-    // Crear categorías
+    // addCategory
     const cat1 = new Category("Categoría1", "Descripción categoría1");
     const cat2 = new Category("Categoría2")
     nuevaInstancia.addCategory(cat1);
@@ -23,7 +23,7 @@ export function testApp() {
         console.log(cat);
     }
 
-    // Errores categorías
+    // Errores addCategory
     try {
         nuevaInstancia.addCategory("notcategory");
     } catch (error) {
@@ -32,6 +32,21 @@ export function testApp() {
 
     try {
         nuevaInstancia.addCategory(cat1);
+    } catch (error) {
+        console.error(error.message);
+    }
+
+    // removeCategory
+    nuevaInstancia.removeCategory(cat1);
+
+    // Muestro categorías
+    for (const cat of nuevaInstancia.categories) {
+        console.log(cat);
+    }
+
+    // Error removeCategory
+    try {
+        nuevaInstancia.removeCategory(cat1);
     } catch (error) {
         console.error(error.message);
     }

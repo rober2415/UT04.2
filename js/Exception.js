@@ -25,13 +25,13 @@ export class InvalidTypeException extends Exception {
 // Excepción ya existe
 export class RegisteredException extends Exception {
     constructor(expectedType) {
-        super(`Error: la categoría ya existe`);
+        super(`Error: la categoría ya existe.`);
     }
 }
 
 // Excepción no registrado
 export class NotRegisteredException extends Exception {
     constructor(expectedType) {
-        super(`Error: la categoría no existe`);
+        super(`Error: la categoría no existe.`);
     }
 }
