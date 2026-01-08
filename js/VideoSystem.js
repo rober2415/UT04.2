@@ -244,6 +244,25 @@ class VideoSystem {
     return this.#actors.size;
   }
 
+  /**
+   * Elimina un actor del sistema
+   */
+  removeActor(...actors) {
+    for (const actor of actors) {
+      // Tipo inválido
+      if (!(actor instanceof Person)) {
+        throw new InvalidTypeException("Person");
+      }
+      // No registrado
+      if (!this.#actors.has(actor)) {
+        throw new NotRegisteredException("actor");
+      }
+      // Eliminar actor
+      this.#actors.delete(actor)
+    }
+    // Number con el nº de elementos
+    return this.#actors.size;
+  }
 }
 
 

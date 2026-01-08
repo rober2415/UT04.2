@@ -165,6 +165,27 @@ export function testApp() {
     } catch (error) {
         console.error("Error addActor ya existe: ", error.message);
     }
+
+    // removeActor
+    nuevaInstancia.removeActor(actor1);
+
+    // Muestro los actores
+    for (const actor of nuevaInstancia.actors) {
+        console.log(actor);
+    }
+    
+    // Errores removeActor
+    try {
+        nuevaInstancia.removeActor("notactor");
+    } catch (error) {
+        console.error("Error removeActor tipo: ", error.message);
+    }
+    try {
+        nuevaInstancia.removeActor(actor1);
+    } catch (error) {
+        console.error("Error removeActor no existe: ", error.message);
+    }
+
 }
 
 window.onload = testApp;
