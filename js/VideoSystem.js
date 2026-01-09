@@ -316,6 +316,7 @@ class VideoSystem {
    * Si el objeto Category o Production no existen se añaden al sistema
    */
   assignCategory(category, ...productions) {
+    // Category null
     if (category === null) {
       throw new EmptyValueException("category");
     }
@@ -324,6 +325,7 @@ class VideoSystem {
       this.addCategory(category);
     }
     for (const production of productions) {
+      // Production null
       if (production === null) {
         throw new EmptyValueException("production");
       }
@@ -333,6 +335,26 @@ class VideoSystem {
       }
       // Asignar la producción a la categoría 
       this.#categories.get(category).add(production);
+    }
+    // Number con el nº total de producciones asignadas a la categoría
+    return this.#categories.get(category).size;
+  }
+
+  /**
+   * Desasigna una o más producciones de una categoría
+   */
+  deassignCategory(category, ...productions) {
+    // Category null
+    if (category === null) {
+      throw new EmptyValueException("category");
+    }
+    for (const production of productions) {
+      // Production null
+      if (production === null) {
+        throw new EmptyValueException("production");
+      }
+      // Eliminar la producción de la categoría 
+      this.#categories.get(category).delete(production);
     }
     // Number con el nº total de producciones asignadas a la categoría
     return this.#categories.get(category).size;

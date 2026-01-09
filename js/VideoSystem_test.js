@@ -235,16 +235,31 @@ export function testApp() {
 
     // Errores assignCategory
     try {
-        nuevaInstancia.assignCategory(null,production1);
+        nuevaInstancia.assignCategory(null, production1);
     } catch (error) {
-        console.error("Error assignCategory: ",error.message);
+        console.error("Error assignCategory: ", error.message);
     }
 
-    // Errores assignCategory
     try {
-        nuevaInstancia.assignCategory(cat1,null);
+        nuevaInstancia.assignCategory(cat1, null);
     } catch (error) {
-        console.error("Error assignCategory: ",error.message);
+        console.error("Error assignCategory: ", error.message);
+    }
+
+    // deassignCategory
+    nuevaInstancia.deassignCategory(cat1, production1);
+
+    // Errores deassignCategory
+    try {
+        nuevaInstancia.deassignCategory(null, production1);
+    } catch (error) {
+        console.error("Error deassignCategory: ", error.message);
+    }
+
+    try {
+        nuevaInstancia.deassignCategory(cat1, null);
+    } catch (error) {
+        console.error("Error deassignCategory: ", error.message);
     }
 
 }
