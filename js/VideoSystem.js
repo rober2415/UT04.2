@@ -365,7 +365,7 @@ class VideoSystem {
    * Si el director o el objeto Production no existen se añaden al sistema
    */
   assignDirector(director, ...productions) {
-    // Category null
+    // Director null
     if (director === null) {
       throw new EmptyValueException("director");
     }
@@ -402,11 +402,40 @@ class VideoSystem {
       if (production === null) {
         throw new EmptyValueException("production");
       }
-      // Eliminar la producción de la categoría 
+      // Eliminar la producción del director 
       this.#directors.get(director).delete(production);
     }
-    // Number con el nº total de producciones asignadas a la categoría
+    // Number con el nº total de producciones asignadas al director
     return this.#directors.get(director).size;
+  }
+
+  /**
+    * Asigna uno más producciones a un actor
+    * Si el actor o el objeto Production no existen se añaden al sistema
+    */
+  assignActor(actor, ...productions) {
+    // Actor null
+    if (actor === null) {
+      throw new EmptyValueException("actor");
+    }
+    // Si el actor no existe, se añade al sistema 
+    if (!this.#actors.has(actor)) {
+      this.addActor(actor);
+    }
+    for (const production of productions) {
+      // Production null
+      if (production === null) {
+        throw new EmptyValueException("production");
+      }
+      // Si la producción no existe, se añade al sistema 
+      if (!this.#productions.has(production)) {
+        this.addProduction(production);
+      }
+      // Asignar la producción al actor 
+      this.#actors.get(actor).add(production);
+    }
+    // Number con el nº total de producciones asignadas al actor
+    return this.#actors.get(actor).size;
   }
 }
 

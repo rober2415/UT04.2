@@ -294,6 +294,22 @@ export function testApp() {
         console.error("Error deassignDirector: ", error.message);
     }
 
+    // assignActor
+    nuevaInstancia.assignActor(actor1, production1);
+
+    // Errores assignActor
+    try {
+        nuevaInstancia.assignActor(null, production1);
+    } catch (error) {
+        console.error("Error assignActor :", error.message);
+    }
+
+    try {
+        nuevaInstancia.assignActor(actor1, null);
+    } catch (error) {
+        console.error("Error assignActor :", error.message);
+    }
+
 }
 
 window.onload = testApp;
