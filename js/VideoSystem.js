@@ -457,6 +457,30 @@ class VideoSystem {
     // Number con el nº total de producciones asignadas al actor
     return this.#actors.get(actor).size;
   }
+
+  /**
+   * Obtiene un iterador con la relación de los actores del
+   * reparto una producción y sus personajes
+   */
+  getCast(production) {
+    // Production null
+    if (production === null) {
+      throw new EmptyValueException("production");
+    }
+    // Actores del reparto una producción y sus personajes
+    const actors = this.#actors;
+    return {
+      *[Symbol.iterator]() {
+        for (const actor of actors.keys()) {
+          const productions = actors.get(actor);
+          // Si el actor está en la producción, se devuelve
+          if (productions.has(production)) {
+            yield actor;
+          }
+        }
+      }
+    };
+  }
 }
 
 

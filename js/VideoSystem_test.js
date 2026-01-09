@@ -232,6 +232,8 @@ export function testApp() {
 
     // assignCategory
     nuevaInstancia.assignCategory(cat1, production1);
+    nuevaInstancia.assignCategory(cat2, production1);
+    nuevaInstancia.assignCategory(cat2, production2);
 
     // Errores assignCategory
     try {
@@ -264,6 +266,8 @@ export function testApp() {
 
     // assignDirector
     nuevaInstancia.assignDirector(director1, production1);
+    nuevaInstancia.assignDirector(director1, production2);
+    nuevaInstancia.assignDirector(director2, production2);
 
     // Errores assignDirector
     try {
@@ -296,6 +300,8 @@ export function testApp() {
 
     // assignActor
     nuevaInstancia.assignActor(actor1, production1);
+    nuevaInstancia.assignActor(actor1, production2);
+    nuevaInstancia.assignActor(actor2, production2);
 
     // Errores assignActor
     try {
@@ -324,6 +330,19 @@ export function testApp() {
         nuevaInstancia.deassignActor(actor1, null);
     } catch (error) {
         console.error("Error deassignActor: ", error.message);
+    }
+
+    // getCast
+    console.log("Actores de production2:");
+    for (const actor of nuevaInstancia.getCast(production2)) {
+        console.log(actor.name);
+    }
+
+    // Error getCast
+    try {
+        nuevaInstancia.getCast(null);
+    } catch (error) {
+        console.error("Error getCast: ", error.message);
     }
 
 }
