@@ -502,6 +502,28 @@ class VideoSystem {
       }
     };
   }
+
+  /**
+   * Obtiene un iterador con las producciones de un actor
+   * y su papel en la producción
+   */
+  getProductionsActor(actor) {
+    // Production null
+    if (actor === null) {
+      throw new EmptyValueException("actor");
+    }
+    // Actores de la colección
+    const actors = this.#actors;
+    return {
+      *[Symbol.iterator]() {
+        // Si la producción tiene actor asignado, se devuelve
+        const productions = actors.get(actor);
+        for (const production of productions) {
+          yield production;
+        }
+      }
+    };
+  }
 }
 
 

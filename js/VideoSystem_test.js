@@ -300,7 +300,7 @@ export function testApp() {
 
     // assignActor
     nuevaInstancia.assignActor(actor1, production1);
-    nuevaInstancia.assignActor(actor1, production2);
+    nuevaInstancia.assignActor(actor2, production1);
     nuevaInstancia.assignActor(actor2, production2);
 
     // Errores assignActor
@@ -356,6 +356,19 @@ export function testApp() {
         nuevaInstancia.getProductionsDirector(null);
     } catch (error) {
         console.error("Error getProductionsDirector: ", error.message);
+    }
+
+    // getProductionsActor
+    console.log("Producciones de actor2:");
+    for (const production of nuevaInstancia.getProductionsActor(actor2)) {
+        console.log(production.title);
+    }
+
+    // Error getProductionsActor
+    try {
+        nuevaInstancia.getProductionsActor(null);
+    } catch (error) {
+        console.error("Error getProductionsActor: ", error.message);
     }
 }
 
