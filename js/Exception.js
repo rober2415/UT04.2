@@ -8,10 +8,10 @@ export class Exception extends Error {
     }
 }
 
-// Excepción vacío
+// Excepción null
 export class EmptyValueException extends Exception {
-    constructor() {
-        super(`Error: El valor no puede estar vacio.`);
+    constructor(expectedType) {
+        super(`Error: El valor ${expectedType} no puede ser null.`);
     }
 }
 

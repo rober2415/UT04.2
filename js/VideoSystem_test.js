@@ -230,6 +230,23 @@ export function testApp() {
         console.error("Error removeDirector no existe: ", error.message);
     }
 
+    // assignCategory
+    nuevaInstancia.assignCategory(cat1, production1);
+
+    // Errores assignCategory
+    try {
+        nuevaInstancia.assignCategory(null,production1);
+    } catch (error) {
+        console.error("Error assignCategory: ",error.message);
+    }
+
+    // Errores assignCategory
+    try {
+        nuevaInstancia.assignCategory(cat1,null);
+    } catch (error) {
+        console.error("Error assignCategory: ",error.message);
+    }
+
 }
 
 window.onload = testApp;

@@ -311,6 +311,32 @@ class VideoSystem {
     return this.#directors.size;
   }
 
+  /**
+   * Asigna uno más producciones a una categoría
+   * Si el objeto Category o Production no existen se añaden al sistema
+   */
+  assignCategory(category, ...productions) {
+    if (category === null) {
+      throw new EmptyValueException("category");
+    }
+    // Si la categoría no existe, se añade al sistema 
+    if (!this.#categories.has(category)) {
+      this.addCategory(category);
+    }
+    for (const production of productions) {
+      if (production === null) {
+        throw new EmptyValueException("production");
+      }
+      // Si la producción no existe, se añade al sistema 
+      if (!this.#productions.has(production)) {
+        this.addProduction(production);
+      }
+      // Asignar la producción a la categoría 
+      this.#categories.get(category).add(production);
+    }
+    // Number con el nº total de producciones asignadas a la categoría
+    return this.#categories.get(category).size;
+  }
 }
 
 
