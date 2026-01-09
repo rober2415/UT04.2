@@ -278,6 +278,22 @@ export function testApp() {
         console.error("Error assignDirector: ", error.message);
     }
 
+    // deassignDirector
+    nuevaInstancia.deassignDirector(director1, production1);
+
+    // Errores deassignDirector
+    try {
+        nuevaInstancia.deassignDirector(null, production1);
+    } catch (error) {
+        console.error("Error deassignDirector: ", error.message);
+    }
+
+    try {
+        nuevaInstancia.deassignDirector(director1, null);
+    } catch (error) {
+        console.error("Error deassignDirector: ", error.message);
+    }
+
 }
 
 window.onload = testApp;

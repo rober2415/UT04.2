@@ -388,6 +388,26 @@ class VideoSystem {
     // Number con el nº total de producciones asignadas al director
     return this.#directors.get(director).size;
   }
+
+  /**
+   * Desasigna una o más producciones de un director
+   */
+  deassignDirector(director, ...productions) {
+    // Director null
+    if (director === null) {
+      throw new EmptyValueException("director");
+    }
+    for (const production of productions) {
+      // Production null
+      if (production === null) {
+        throw new EmptyValueException("production");
+      }
+      // Eliminar la producción de la categoría 
+      this.#directors.get(director).delete(production);
+    }
+    // Number con el nº total de producciones asignadas a la categoría
+    return this.#directors.get(director).size;
+  }
 }
 
 
