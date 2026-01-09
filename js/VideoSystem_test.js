@@ -310,6 +310,22 @@ export function testApp() {
         console.error("Error assignActor :", error.message);
     }
 
+    // deassignActor
+    nuevaInstancia.deassignActor(actor1, production1);
+
+    // Errores deassignActor
+    try {
+        nuevaInstancia.deassignActor(null, production1);
+    } catch (error) {
+        console.error("Error deassignActor: ", error.message);
+    }
+
+    try {
+        nuevaInstancia.deassignActor(actor1, null);
+    } catch (error) {
+        console.error("Error deassignActor: ", error.message);
+    }
+
 }
 
 window.onload = testApp;

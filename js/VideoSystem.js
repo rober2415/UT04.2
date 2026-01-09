@@ -437,6 +437,26 @@ class VideoSystem {
     // Number con el nº total de producciones asignadas al actor
     return this.#actors.get(actor).size;
   }
+
+  /**
+   * Desasigna una o más producciones de un actor
+   */
+  deassignActor(actor, ...productions) {
+    // Actor null
+    if (actor === null) {
+      throw new EmptyValueException("actor");
+    }
+    for (const production of productions) {
+      // Production null
+      if (production === null) {
+        throw new EmptyValueException("production");
+      }
+      // Eliminar la producción del actor 
+      this.#actors.get(actor).delete(production);
+    }
+    // Number con el nº total de producciones asignadas al actor
+    return this.#actors.get(actor).size;
+  }
 }
 
 
