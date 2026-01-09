@@ -266,7 +266,7 @@ export function testApp() {
 
     // assignDirector
     nuevaInstancia.assignDirector(director1, production1);
-    nuevaInstancia.assignDirector(director1, production2);
+    nuevaInstancia.assignDirector(director2, production1);
     nuevaInstancia.assignDirector(director2, production2);
 
     // Errores assignDirector
@@ -345,6 +345,18 @@ export function testApp() {
         console.error("Error getCast: ", error.message);
     }
 
+    // getProductionsDirector
+    console.log("Producciones de director2:");
+    for (const production of nuevaInstancia.getProductionsDirector(director2)) {
+        console.log(production.title);
+    }
+
+    // Error getProductionsDirector
+    try {
+        nuevaInstancia.getProductionsDirector(null);
+    } catch (error) {
+        console.error("Error getProductionsDirector: ", error.message);
+    }
 }
 
 window.onload = testApp;

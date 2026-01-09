@@ -467,7 +467,7 @@ class VideoSystem {
     if (production === null) {
       throw new EmptyValueException("production");
     }
-    // Actores del reparto una producción y sus personajes
+    // Actores de la colección
     const actors = this.#actors;
     return {
       *[Symbol.iterator]() {
@@ -477,6 +477,27 @@ class VideoSystem {
           if (productions.has(production)) {
             yield actor;
           }
+        }
+      }
+    };
+  }
+
+  /**
+   * Obtiene un iterador con las producciones de un director
+   */
+  getProductionsDirector(director) {
+    // Production null
+    if (director === null) {
+      throw new EmptyValueException("director");
+    }
+    // Directores de la colección
+    const directors = this.#directors;
+    return {
+      *[Symbol.iterator]() {
+        // Si la producción tiene director asignado, se devuelve
+        const productions = directors.get(director);
+        for (const production of productions) {
+          yield production;
         }
       }
     };
