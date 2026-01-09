@@ -370,6 +370,19 @@ export function testApp() {
     } catch (error) {
         console.error("Error getProductionsActor: ", error.message);
     }
+
+    // getProductionsCategory
+    console.log("Producciones de cat2:");
+    for (const production of nuevaInstancia.getProductionsCategory(cat2)) {
+        console.log(production.title);
+    }
+
+    // Error getProductionsCategory
+    try {
+        nuevaInstancia.getProductionsCategory(null);
+    } catch (error) {
+        console.error("Error getProductionsCategory: ", error.message);
+    }
 }
 
 window.onload = testApp;

@@ -508,7 +508,7 @@ class VideoSystem {
    * y su papel en la producción
    */
   getProductionsActor(actor) {
-    // Production null
+    // Actor null
     if (actor === null) {
       throw new EmptyValueException("actor");
     }
@@ -518,6 +518,27 @@ class VideoSystem {
       *[Symbol.iterator]() {
         // Si la producción tiene actor asignado, se devuelve
         const productions = actors.get(actor);
+        for (const production of productions) {
+          yield production;
+        }
+      }
+    };
+  }
+
+  /**
+   * Obtiene un iterador con las producciones de una categoría determinada
+   */
+  getProductionsCategory(category) {
+    // Category null
+    if (category === null) {
+      throw new EmptyValueException("category");
+    }
+    // Categorías de la colección
+    const categories = this.#categories;
+    return {
+      *[Symbol.iterator]() {
+        // Si la producción tiene una categoría asignada, se devuelve
+        const productions = categories.get(category);
         for (const production of productions) {
           yield production;
         }
