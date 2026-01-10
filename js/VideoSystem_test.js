@@ -408,6 +408,16 @@ function testApp() {
         console.log(production.title, production.publication.getFullYear());
     }
 
+    // filterProductionsInCategory
+    console.log("Producciones en categoría2 ordenadas por fecha:");
+    for (const production of nuevaInstancia.filterProductionsInCategory(
+        cat2,
+        production => production.publication.getFullYear() > 2000,
+        (a, b) => a.title.localeCompare(b.title)
+    )) {
+        console.log(production.title, production.publication.getFullYear());
+    }
+
 }
 
 window.onload = testApp;

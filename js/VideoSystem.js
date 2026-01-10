@@ -598,6 +598,31 @@ class VideoSystem {
     // Iiterador
     return result[Symbol.iterator]();
   }
+
+  /**
+   * Obtiene un iterador con la relación de las producciones en una categoría,
+   * que cumplan los criterios de la función
+   * El iterador puede estar ordenado en base a una función de ordenación
+   */
+  filterProductionsInCategory(category, filterFn, sortFn) {
+    // Category null
+    if (category === null) {
+      throw new EmptyValueException("category");
+    }
+    // Si la categoría no existe, se añade al sistema 
+    if (!this.#categories.has(category)) {
+      throw new NotRegisteredException("categoria");
+    }
+    // 1. Obtener las producciones de la categoría
+    const productions = this.#categories.get(category);
+    // Filtrar en base a la función
+    let result = Array.from(productions).filter(filterFn);
+    // Ordernar en base a la función
+    result.sort(sortFn);
+    // Iterador
+    return result[Symbol.iterator]();
+  }
+
 }
 
 
