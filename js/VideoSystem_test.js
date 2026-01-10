@@ -1,9 +1,8 @@
 "use strict";
 
 import { VideoSystem } from "./VideoSystem.js";
-import { Category } from "./Category.js";
 
-export function testApp() {
+function testApp() {
     // Instanacia singleton
     const nuevaInstancia = VideoSystem.getInstance("Nueva");
     const nuevaInstancia2 = VideoSystem.getInstance("nueva2");
@@ -105,8 +104,13 @@ export function testApp() {
     const production1 = nuevaInstancia.createProduction("Titulo1", "Nacionalidad1", new Date(2001, 10, 10), "Sinopsis1", "Sin imagen");
     const production2 = nuevaInstancia.createProduction("Titulo2", "Nacionalidad2", new Date(2002, 10, 10), "Sinopsis2", "Sin imagen");
     const production3 = nuevaInstancia.createProduction("Titulo1", "Nacionalidad1", new Date(2001, 10, 10), "Sinopsis1", "Sin imagen");
+    const production4 = nuevaInstancia.createProduction("Titulo3", "Nacionalidad2", new Date(2003, 10, 10), "Sinopsis1", "Sin imagen");
+    const production5 = nuevaInstancia.createProduction("Titulo4", "Nacionalidad2", new Date(2004, 10, 10), "Sinopsis1", "Sin imagen");
 
     // addProduction
+    nuevaInstancia.addProduction(production3);
+    nuevaInstancia.addProduction(production4);
+    nuevaInstancia.addProduction(production5);
     nuevaInstancia.addProduction(production1);
     nuevaInstancia.addProduction(production2);
 
@@ -393,6 +397,15 @@ export function testApp() {
         nuevaInstancia.getProductionsCategory(null);
     } catch (error) {
         console.error("Error getProductionsCategory: ", error.message);
+    }
+
+    // findProductions  
+    console.log("Producciones nacionalidad2 ordenadas por fecha:");
+    for (const production of nuevaInstancia.findProductions(
+        (production) => production.nationality === "Nacionalidad2",
+        (a, b) => a.publication - b.publication
+    )) {
+        console.log(production.title, production.publication.getFullYear());
     }
 
 }

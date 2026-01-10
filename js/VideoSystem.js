@@ -585,6 +585,19 @@ class VideoSystem {
   createCategory(name, description) {
     return new Category(name, description);
   }
+
+  /**
+   * Obtiene un iterador que cumpla un criterio concreto en base a una función de callback
+   * El iterador puede estar ordenado en base a la segunda función
+   */
+  findProductions(filterFn, sortFn) {
+    // Filtrar en base a la función
+    let result = Array.from(this.#productions).filter(filterFn);
+    // Ordenar en base a la función
+    result.sort(sortFn);
+    // Iiterador
+    return result[Symbol.iterator]();
+  }
 }
 
 
