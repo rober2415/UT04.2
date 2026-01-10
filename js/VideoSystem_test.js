@@ -418,6 +418,31 @@ function testApp() {
         console.log(production.title, production.publication.getFullYear());
     }
 
+    // Errores filterProductionsInCategory
+    try {
+        for (const production of nuevaInstancia.filterProductionsInCategory(
+            null,
+            production => production.publication.getFullYear() > 2000,
+            (a, b) => a.title.localeCompare(b.title)
+        )) {
+            console.log(production.title, production.publication.getFullYear());
+        }
+    } catch (error) {
+        console.error(error.message);
+    }
+
+    try {
+        for (const production of nuevaInstancia.filterProductionsInCategory(
+            "notcategory",
+            production => production.publication.getFullYear() > 2000,
+            (a, b) => a.title.localeCompare(b.title)
+        )) {
+            console.log(production.title, production.publication.getFullYear());
+        }
+    } catch (error) {
+        console.error(error.message);
+    }
+
 }
 
 window.onload = testApp;

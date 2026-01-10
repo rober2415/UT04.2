@@ -609,11 +609,11 @@ class VideoSystem {
     if (category === null) {
       throw new EmptyValueException("category");
     }
-    // Si la categoría no existe, se añade al sistema 
+    // Si la categoría no existe 
     if (!this.#categories.has(category)) {
       throw new NotRegisteredException("categoria");
     }
-    // 1. Obtener las producciones de la categoría
+    // Obtener las producciones de la categoría
     const productions = this.#categories.get(category);
     // Filtrar en base a la función
     let result = Array.from(productions).filter(filterFn);
