@@ -60,8 +60,7 @@ function testVideoSystem() {
     const user4 = nuevaInstancia.createUser("usuario4", "email1", "password4");
 
     // addUser
-    nuevaInstancia.addUser(user1);
-    nuevaInstancia.addUser(user2);
+    nuevaInstancia.addUser(user1, user2);
 
     // Muestro usuarios
     for (const user of nuevaInstancia.users) {
@@ -115,8 +114,7 @@ function testVideoSystem() {
     const production5 = nuevaInstancia.createProduction("Titulo4", "Nacionalidad2", new Date(2004, 10, 10), "Sinopsis1", "Sin imagen");
 
     // addProduction
-    nuevaInstancia.addProduction(production3);
-    nuevaInstancia.addProduction(production4);
+    nuevaInstancia.addProduction(production3, production4);
     nuevaInstancia.addProduction(production5);
     nuevaInstancia.addProduction(production1);
     nuevaInstancia.addProduction(production2);
@@ -165,8 +163,7 @@ function testVideoSystem() {
     const actor3 = nuevaInstancia.createPerson("Nombre1", "Primer Apellido1", "Segundo Apellido1", new Date(2001, 10, 10), "Sin imagen");
 
     // addActor
-    nuevaInstancia.addActor(actor1);
-    nuevaInstancia.addActor(actor2);
+    nuevaInstancia.addActor(actor1, actor2);
 
     // Muestro los actores
     for (const actor of nuevaInstancia.actors) {
@@ -211,8 +208,7 @@ function testVideoSystem() {
     const director2 = nuevaInstancia.createPerson("Nombre2", "Primer Apellido2", "Segundo Apellido2", new Date(2002, 10, 10), "Sin imagen");
 
     // addDirector
-    nuevaInstancia.addDirector(director1);
-    nuevaInstancia.addDirector(director2);
+    nuevaInstancia.addDirector(director1, director2);
 
     // Muestro los directores
     for (const director of nuevaInstancia.directors) {
