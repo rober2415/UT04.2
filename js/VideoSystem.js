@@ -578,6 +578,13 @@ class VideoSystem {
     return new User(username, email, password);
   }
 
+  /**
+   * Devuelve un objeto Category si está registrado, o crea un nuevo
+   * Si es nuevo NO lo añade al manager
+   */
+  createCategory(name, description) {
+    return new Category(name, description);
+  }
 }
 
 

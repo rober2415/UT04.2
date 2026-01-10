@@ -12,9 +12,12 @@ export function testApp() {
     console.log(`Nombre de la instancia 1: ${nuevaInstancia.name}`);
     console.log(`Nombre de la instancia 2: ${nuevaInstancia2.name}`);
 
+    // createCategory
+    const cat1 = nuevaInstancia.createCategory("Categoría1", "Descripción categoría1");
+    const cat2 = nuevaInstancia.createCategory("Categoría2");
+    const cat3 = nuevaInstancia.createCategory("Categoría1", "Descripción categoría1");
+
     // addCategory
-    const cat1 = new Category("Categoría1", "Descripción categoría1");
-    const cat2 = new Category("Categoría2")
     nuevaInstancia.addCategory(cat1);
     nuevaInstancia.addCategory(cat2);
 
@@ -31,7 +34,7 @@ export function testApp() {
     }
 
     try {
-        nuevaInstancia.addCategory(cat1);
+        nuevaInstancia.addCategory(cat3);
     } catch (error) {
         console.error(error.message);
     }
@@ -51,10 +54,12 @@ export function testApp() {
         console.error(error.message);
     }
 
-    // addUser
+    // createUser
     const user1 = nuevaInstancia.createUser("usuario1", "email1", "password1");
     const user2 = nuevaInstancia.createUser("usuario2", "email2", "password2");
     const user3 = nuevaInstancia.createUser("usuario1", "email1", "password1");
+
+    // addUser
     nuevaInstancia.addUser(user1);
     nuevaInstancia.addUser(user2);
 
@@ -96,10 +101,12 @@ export function testApp() {
         console.error(error.message);
     }
 
-    // addProduction
+    // createProduction
     const production1 = nuevaInstancia.createProduction("Titulo1", "Nacionalidad1", new Date(2001, 10, 10), "Sinopsis1", "Sin imagen");
     const production2 = nuevaInstancia.createProduction("Titulo2", "Nacionalidad2", new Date(2002, 10, 10), "Sinopsis2", "Sin imagen");
     const production3 = nuevaInstancia.createProduction("Titulo1", "Nacionalidad1", new Date(2001, 10, 10), "Sinopsis1", "Sin imagen");
+
+    // addProduction
     nuevaInstancia.addProduction(production1);
     nuevaInstancia.addProduction(production2);
 
