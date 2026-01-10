@@ -8,8 +8,15 @@ export class Exception extends Error {
     }
 }
 
-// Excepción null
+// Excepción vacio
 export class EmptyValueException extends Exception {
+    constructor(expectedType) {
+        super(`Error: El valor ${expectedType} no puede ser null.`);
+    }
+}
+
+// Excepción null
+export class NotNullValueException extends Exception {
     constructor(expectedType) {
         super(`Error: El valor ${expectedType} no puede ser null.`);
     }
@@ -22,7 +29,7 @@ export class InvalidTypeException extends Exception {
     }
 }
 
-// Excepción ya existe
+// Excepción ya registrado
 export class RegisteredException extends Exception {
     constructor(expectedType) {
         super(`Error: el/la ${expectedType} ya existe.`);

@@ -2,6 +2,7 @@
 
 import {
   EmptyValueException,
+  NotNullValueException,
   InvalidTypeException,
   RegisteredException,
   NotRegisteredException
@@ -326,7 +327,7 @@ class VideoSystem {
   assignCategory(category, ...productions) {
     // Category null
     if (category === null) {
-      throw new EmptyValueException("category");
+      throw new NotNullValueException("category");
     }
     // Si la categoría no existe, se añade al sistema 
     if (!this.#categories.has(category)) {
@@ -335,7 +336,7 @@ class VideoSystem {
     for (const production of productions) {
       // Production null
       if (production === null) {
-        throw new EmptyValueException("production");
+        throw new NotNullValueException("production");
       }
       // Si la producción no existe, se añade al sistema 
       if (!this.#productions.has(production)) {
@@ -354,12 +355,12 @@ class VideoSystem {
   deassignCategory(category, ...productions) {
     // Category null
     if (category === null) {
-      throw new EmptyValueException("category");
+      throw new NotNullValueException("category");
     }
     for (const production of productions) {
       // Production null
       if (production === null) {
-        throw new EmptyValueException("production");
+        throw new NotNullValueException("production");
       }
       // Eliminar la producción de la categoría 
       this.#categories.get(category).delete(production);
@@ -375,7 +376,7 @@ class VideoSystem {
   assignDirector(director, ...productions) {
     // Director null
     if (director === null) {
-      throw new EmptyValueException("director");
+      throw new NotNullValueException("director");
     }
     // Si el director no existe, se añade al sistema 
     if (!this.#directors.has(director)) {
@@ -384,7 +385,7 @@ class VideoSystem {
     for (const production of productions) {
       // Production null
       if (production === null) {
-        throw new EmptyValueException("production");
+        throw new NotNullValueException("production");
       }
       // Si la producción no existe, se añade al sistema 
       if (!this.#productions.has(production)) {
@@ -403,12 +404,12 @@ class VideoSystem {
   deassignDirector(director, ...productions) {
     // Director null
     if (director === null) {
-      throw new EmptyValueException("director");
+      throw new NotNullValueException("director");
     }
     for (const production of productions) {
       // Production null
       if (production === null) {
-        throw new EmptyValueException("production");
+        throw new NotNullValueException("production");
       }
       // Eliminar la producción del director 
       this.#directors.get(director).delete(production);
@@ -424,7 +425,7 @@ class VideoSystem {
   assignActor(actor, ...productions) {
     // Actor null
     if (actor === null) {
-      throw new EmptyValueException("actor");
+      throw new NotNullValueException("actor");
     }
     // Si el actor no existe, se añade al sistema 
     if (!this.#actors.has(actor)) {
@@ -433,7 +434,7 @@ class VideoSystem {
     for (const production of productions) {
       // Production null
       if (production === null) {
-        throw new EmptyValueException("production");
+        throw new NotNullValueException("production");
       }
       // Si la producción no existe, se añade al sistema 
       if (!this.#productions.has(production)) {
@@ -452,12 +453,12 @@ class VideoSystem {
   deassignActor(actor, ...productions) {
     // Actor null
     if (actor === null) {
-      throw new EmptyValueException("actor");
+      throw new NotNullValueException("actor");
     }
     for (const production of productions) {
       // Production null
       if (production === null) {
-        throw new EmptyValueException("production");
+        throw new NotNullValueException("production");
       }
       // Eliminar la producción del actor 
       this.#actors.get(actor).delete(production);
@@ -473,7 +474,7 @@ class VideoSystem {
   getCast(production) {
     // Production null
     if (production === null) {
-      throw new EmptyValueException("production");
+      throw new NotNullValueException("production");
     }
     // Actores de la colección
     const actors = this.#actors;
@@ -496,7 +497,7 @@ class VideoSystem {
   getProductionsDirector(director) {
     // Production null
     if (director === null) {
-      throw new EmptyValueException("director");
+      throw new NotNullValueException("director");
     }
     // Directores de la colección
     const directors = this.#directors;
@@ -518,7 +519,7 @@ class VideoSystem {
   getProductionsActor(actor) {
     // Actor null
     if (actor === null) {
-      throw new EmptyValueException("actor");
+      throw new NotNullValueException("actor");
     }
     // Actores de la colección
     const actors = this.#actors;
@@ -539,7 +540,7 @@ class VideoSystem {
   getProductionsCategory(category) {
     // Category null
     if (category === null) {
-      throw new EmptyValueException("category");
+      throw new NotNullValueException("category");
     }
     // Categorías de la colección
     const categories = this.#categories;
@@ -607,7 +608,7 @@ class VideoSystem {
   filterProductionsInCategory(category, filterFn, sortFn) {
     // Category null
     if (category === null) {
-      throw new EmptyValueException("category");
+      throw new NotNullValueException("category");
     }
     // Si la categoría no existe 
     if (!this.#categories.has(category)) {

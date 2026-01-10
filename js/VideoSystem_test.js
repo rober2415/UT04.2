@@ -2,7 +2,7 @@
 
 import { VideoSystem } from "./VideoSystem.js";
 
-function testApp() {
+function testVideoSystem() {
     // Instanacia singleton
     const nuevaInstancia = VideoSystem.getInstance("Nueva");
     const nuevaInstancia2 = VideoSystem.getInstance("nueva2");
@@ -389,7 +389,7 @@ function testApp() {
     // getProductionsCategory
     console.log("Producciones de cat2:");
     for (const production of nuevaInstancia.getProductionsCategory(cat2)) {
-        console.log(production.title);
+        console.log(production.toString());
     }
 
     // Error getProductionsCategory
@@ -405,7 +405,7 @@ function testApp() {
         (production) => production.nationality === "Nacionalidad2",
         (a, b) => a.publication - b.publication
     )) {
-        console.log(production.title, production.publication.getFullYear());
+        console.log(production.toString());
     }
 
     // filterProductionsInCategory
@@ -415,7 +415,7 @@ function testApp() {
         production => production.publication.getFullYear() > 2000,
         (a, b) => a.title.localeCompare(b.title)
     )) {
-        console.log(production.title, production.publication.getFullYear());
+        console.log(production.toString());
     }
 
     // Errores filterProductionsInCategory
@@ -425,10 +425,10 @@ function testApp() {
             production => production.publication.getFullYear() > 2000,
             (a, b) => a.title.localeCompare(b.title)
         )) {
-            console.log(production.title, production.publication.getFullYear());
+            console.log(production.toString());
         }
     } catch (error) {
-        console.error(error.message);
+        console.error("Error null filterProductionsInCategory: ", error.message);
     }
 
     try {
@@ -437,12 +437,12 @@ function testApp() {
             production => production.publication.getFullYear() > 2000,
             (a, b) => a.title.localeCompare(b.title)
         )) {
-            console.log(production.title, production.publication.getFullYear());
+            console.log(production.toString());
         }
     } catch (error) {
-        console.error(error.message);
+        console.error("Error no registrada filterProductionsInCategory: ", error.message);
     }
 
 }
 
-window.onload = testApp;
+window.onload = testVideoSystem;
