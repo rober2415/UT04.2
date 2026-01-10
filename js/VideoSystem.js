@@ -234,8 +234,12 @@ class VideoSystem {
         throw new InvalidTypeException("Person");
       }
       // Ya registrado
-      if (this.#actors.has(actor)) {
-        throw new RegisteredException("actor");
+      for (const a of this.#actors.keys()) {
+        if (a.name === actor.name &&
+          a.lastname1 === actor.lastname1 &&
+          a.lastname2 === actor.lastname2) {
+          throw new RegisteredException("actor");
+        }
       }
       // Añadir categoría
       this.#actors.set(actor, new Set());
@@ -545,6 +549,15 @@ class VideoSystem {
       }
     };
   }
+
+  /**
+   * Devuelve un objeto Person si está registrado, o crea un nuevo
+   * Si es nuevo NO lo añade al manager
+   */
+  createPerson(name, lastname1, lastname2, born, picture) {
+    return new Person(name, lastname1, lastname2, born, picture);
+  }
+
 }
 
 

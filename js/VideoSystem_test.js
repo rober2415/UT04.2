@@ -142,9 +142,11 @@ export function testApp() {
         console.error("Error removeProduction no existe: ", error.message);
     }
 
+    // createPerson
+    const actor1 = nuevaInstancia.createPerson("Nombre1", "Primer Apellido1", "Segundo Apellido1", new Date(2001, 10, 10), "Sin imagen");
+    const actor2 = nuevaInstancia.createPerson("Nombre2", "Primer Apellido2", "Segundo Apellido2", new Date(2002, 10, 10), "Sin imagen");
+
     // addActor
-    const actor1 = new Person("Nombre1", "Primer Apellido1", "Segundo Apellido1", new Date(2001, 10, 10), "Sin imagen");
-    const actor2 = new Person("Nombre2", "Primer Apellido2", "Segundo Apellido2", new Date(2002, 10, 10), "Sin imagen");
     nuevaInstancia.addActor(actor1);
     nuevaInstancia.addActor(actor2);
 
@@ -186,9 +188,11 @@ export function testApp() {
         console.error("Error removeActor no existe: ", error.message);
     }
 
+    // createPerson
+    const director1 = nuevaInstancia.createPerson("Nombre1", "Primer Apellido1", "Segundo Apellido1", new Date(2001, 10, 10), "Sin imagen");
+    const director2 = nuevaInstancia.createPerson("Nombre2", "Primer Apellido2", "Segundo Apellido2", new Date(2002, 10, 10), "Sin imagen");
+
     // addDirector
-    const director1 = new Person("Nombre1", "Primer Apellido1", "Segundo Apellido1", new Date(2001, 10, 10), "Sin imagen");
-    const director2 = new Person("Nombre2", "Primer Apellido2", "Segundo Apellido2", new Date(2002, 10, 10), "Sin imagen");
     nuevaInstancia.addDirector(director1);
     nuevaInstancia.addDirector(director2);
 
@@ -383,6 +387,7 @@ export function testApp() {
     } catch (error) {
         console.error("Error getProductionsCategory: ", error.message);
     }
+
 }
 
 window.onload = testApp;
