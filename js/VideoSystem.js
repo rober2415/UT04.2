@@ -186,8 +186,12 @@ class VideoSystem {
         throw new InvalidTypeException("Production");
       }
       // Ya registrado     
-      if (this.#productions.has(production)) {
-        throw new RegisteredException("producción");
+      for (const product of this.#productions.keys()) {
+        if (product.title === production.title &&
+          product.nationality === production.nationality &&
+          product.publication === production.publication) {
+          throw new RegisteredException("producción");
+        }
       }
       // Añadir producción
       this.#productions.add(production);
@@ -234,10 +238,10 @@ class VideoSystem {
         throw new InvalidTypeException("Person");
       }
       // Ya registrado
-      for (const a of this.#actors.keys()) {
-        if (a.name === actor.name &&
-          a.lastname1 === actor.lastname1 &&
-          a.lastname2 === actor.lastname2) {
+      for (const act of this.#actors.keys()) {
+        if (act.name === actor.name &&
+          act.lastname1 === actor.lastname1 &&
+          act.lastname2 === actor.lastname2) {
           throw new RegisteredException("actor");
         }
       }
@@ -556,6 +560,14 @@ class VideoSystem {
    */
   createPerson(name, lastname1, lastname2, born, picture) {
     return new Person(name, lastname1, lastname2, born, picture);
+  }
+
+  /**
+   * Devuelve un objeto Production si está registrado, o crea un nuevo
+   * Si es nuevo NO lo añade al manager
+   */
+  createProduction(title, nationality, publication, synopsis, image) {
+    return new Production(title, nationality, publication, synopsis, image);
   }
 
 }

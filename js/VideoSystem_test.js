@@ -99,8 +99,9 @@ export function testApp() {
     }
 
     // addProduction
-    const production1 = new Production("Titulo1", "Nacionalidad1", new Date(2001, 10, 10), "Sinopsis1", "Sin imagen");
-    const production2 = new Production("Titulo2", "Nacionalidad2", new Date(2002, 10, 10), "Sinopsis2", "Sin imagen");
+    const production1 = nuevaInstancia.createProduction("Titulo1", "Nacionalidad1", new Date(2001, 10, 10), "Sinopsis1", "Sin imagen");
+    const production2 = nuevaInstancia.createProduction("Titulo2", "Nacionalidad2", new Date(2002, 10, 10), "Sinopsis2", "Sin imagen");
+    const production3 = nuevaInstancia.createProduction("Titulo1", "Nacionalidad1", new Date(2001, 10, 10), "Sinopsis1", "Sin imagen");
     nuevaInstancia.addProduction(production1);
     nuevaInstancia.addProduction(production2);
 
@@ -117,7 +118,7 @@ export function testApp() {
     }
 
     try {
-        nuevaInstancia.addProduction(production1);
+        nuevaInstancia.addProduction(production3);
     } catch (error) {
         console.error("Error addProduction ya existe: ", error.message);
     }
@@ -145,6 +146,7 @@ export function testApp() {
     // createPerson
     const actor1 = nuevaInstancia.createPerson("Nombre1", "Primer Apellido1", "Segundo Apellido1", new Date(2001, 10, 10), "Sin imagen");
     const actor2 = nuevaInstancia.createPerson("Nombre2", "Primer Apellido2", "Segundo Apellido2", new Date(2002, 10, 10), "Sin imagen");
+    const actor3 = nuevaInstancia.createPerson("Nombre1", "Primer Apellido1", "Segundo Apellido1", new Date(2001, 10, 10), "Sin imagen");
 
     // addActor
     nuevaInstancia.addActor(actor1);
@@ -163,7 +165,7 @@ export function testApp() {
     }
 
     try {
-        nuevaInstancia.addActor(actor1);
+        nuevaInstancia.addActor(actor3);
     } catch (error) {
         console.error("Error addActor ya existe: ", error.message);
     }
