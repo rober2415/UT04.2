@@ -5,7 +5,8 @@ import {
   NotNullValueException,
   InvalidTypeException,
   RegisteredException,
-  NotRegisteredException
+  NotRegisteredException,
+  RegisteredEmailException
 } from "./Exception.js";
 
 import { Category } from "./Category.js";
@@ -144,8 +145,11 @@ class VideoSystem {
       }
       // Ya registrado
       for (const u of this.#users.values()) {
-        if (u.username === user.username || u.email === user.email) {
+        if (u.username === user.username) {
           throw new RegisteredException("usuario");
+        }
+        if (u.email === user.email) {
+          throw new RegisteredEmailException("email");
         }
       }
       // Añadir usuario
@@ -603,8 +607,10 @@ class VideoSystem {
   findProductions(filterFn, sortFn) {
     // Filtrar en base a la función
     let result = Array.from(this.#productions).filter(filterFn);
-    // Ordenar en base a la función
-    result.sort(sortFn);
+    // Ordenar en base a la función si se proporciona
+    if (sortFn !== undefined) {
+      result.sort(sortFn);
+    }
     // Iiterador
     return result[Symbol.iterator]();
   }

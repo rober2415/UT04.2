@@ -65,7 +65,7 @@ function testVideoSystem() {
 
     // Muestro usuarios
     for (const user of nuevaInstancia.users) {
-        console.log("Usuarios después de añadir", user);
+        console.log("Usuarios después de añadir", user.toString());
     }
 
     // Errores addUser
@@ -78,13 +78,13 @@ function testVideoSystem() {
     try {
         nuevaInstancia.addUser(user3);
     } catch (error) {
-        console.error("Error addUser ya existe: ", error.message);
+        console.error("Error addUser user ya existe: ", error.message);
     }
 
     try {
         nuevaInstancia.addUser(user4);
     } catch (error) {
-        console.error("Error addUser ya existe: ", error.message);
+        console.error("Error addUser email ya existe: ", error.message);
     }
 
     // removeUser
@@ -92,7 +92,7 @@ function testVideoSystem() {
 
     // Muestro usuarios
     for (const user of nuevaInstancia.users) {
-        console.log("Usuarios después de borrar", user);
+        console.log("Usuarios después de borrar", user.toString());
     }
 
     // Errores removeUser
@@ -104,7 +104,7 @@ function testVideoSystem() {
     try {
         nuevaInstancia.removeUser(user1);
     } catch (error) {
-        console.error(error.message);
+        console.error("Error removeUser ", error.message);
     }
 
     // createProduction
@@ -123,7 +123,7 @@ function testVideoSystem() {
 
     // Muestro producciones
     for (const production of nuevaInstancia.productions) {
-        console.log(production);
+        console.log(production.toString());
     }
 
     // Errores addProduction
@@ -144,7 +144,7 @@ function testVideoSystem() {
 
     // Muestro produciones
     for (const production of nuevaInstancia.productions) {
-        console.log("Produciones después de borrar", production);
+        console.log("Produciones después de borrar", production.toString());
     }
 
     // Errores removeProduction
@@ -170,7 +170,7 @@ function testVideoSystem() {
 
     // Muestro los actores
     for (const actor of nuevaInstancia.actors) {
-        console.log(actor);
+        console.log(actor.toString());
     }
 
     // Errores addActor
@@ -191,7 +191,7 @@ function testVideoSystem() {
 
     // Muestro los actores
     for (const actor of nuevaInstancia.actors) {
-        console.log(actor);
+        console.log(actor.toString());
     }
 
     // Errores removeActor
@@ -216,7 +216,7 @@ function testVideoSystem() {
 
     // Muestro los directores
     for (const director of nuevaInstancia.directors) {
-        console.log(director);
+        console.log(director.toString());
     }
 
     // Errores addDirector
@@ -237,7 +237,7 @@ function testVideoSystem() {
 
     // Muestro los directores
     for (const director of nuevaInstancia.directors) {
-        console.log(director);
+        console.log(director.toString());
     }
 
     // Errores removeDirector
@@ -357,7 +357,7 @@ function testVideoSystem() {
     // getCast
     console.log("Actores de production2:");
     for (const actor of nuevaInstancia.getCast(production2)) {
-        console.log(actor.name);
+        console.log(actor.toString());
     }
 
     // Error getCast
@@ -370,7 +370,7 @@ function testVideoSystem() {
     // getProductionsDirector
     console.log("Producciones de director2:");
     for (const production of nuevaInstancia.getProductionsDirector(director2)) {
-        console.log(production.title);
+        console.log(production.toString());
     }
 
     // Error getProductionsDirector
@@ -420,7 +420,7 @@ function testVideoSystem() {
     for (const production of nuevaInstancia.filterProductionsInCategory(
         cat2,
         production => production.publication.getFullYear() > 2000,
-        (a, b) => a.title.localeCompare(b.title)
+        (a, b) => a.publication - b.publication
     )) {
         console.log(production.toString());
     }
@@ -430,7 +430,7 @@ function testVideoSystem() {
         for (const production of nuevaInstancia.filterProductionsInCategory(
             null,
             production => production.publication.getFullYear() > 2000,
-            (a, b) => a.title.localeCompare(b.title)
+            (a, b) => a.publication - b.publication
         )) {
             console.log(production.toString());
         }
@@ -442,7 +442,7 @@ function testVideoSystem() {
         for (const production of nuevaInstancia.filterProductionsInCategory(
             "notcategory",
             production => production.publication.getFullYear() > 2000,
-            (a, b) => a.title.localeCompare(b.title)
+            (a, b) => a.publication - b.publication
         )) {
             console.log(production.toString());
         }
