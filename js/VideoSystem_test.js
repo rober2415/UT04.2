@@ -17,8 +17,7 @@ function testVideoSystem() {
     const cat3 = nuevaInstancia.createCategory("Categoría1", "Descripción categoría1");
 
     // addCategory
-    nuevaInstancia.addCategory(cat1);
-    nuevaInstancia.addCategory(cat2);
+    nuevaInstancia.addCategory(cat1, cat2);
 
     // Muestro categorías
     for (const cat of nuevaInstancia.categories) {
@@ -29,19 +28,20 @@ function testVideoSystem() {
     try {
         nuevaInstancia.addCategory("notcategory");
     } catch (error) {
-        console.error(error.message);
+        console.error("Error addCategory no puede ser null: ", error.message);
     }
 
     try {
         nuevaInstancia.addCategory(cat3);
     } catch (error) {
-        console.error(error.message);
+        console.error("Error addCategory ya existe: ", error.message);
     }
 
     // removeCategory
-    nuevaInstancia.removeCategory(cat1);
+    nuevaInstancia.removeCategory(cat2);
 
     // Muestro categorías
+    console.log("Categorías después de borrar:")
     for (const cat of nuevaInstancia.categories) {
         console.log(cat);
     }
@@ -50,13 +50,14 @@ function testVideoSystem() {
     try {
         nuevaInstancia.removeCategory(cat1);
     } catch (error) {
-        console.error(error.message);
+        console.error("Error removeCategory no registrada: ", error.message);
     }
 
     // createUser
     const user1 = nuevaInstancia.createUser("usuario1", "email1", "password1");
     const user2 = nuevaInstancia.createUser("usuario2", "email2", "password2");
-    const user3 = nuevaInstancia.createUser("usuario1", "email1", "password1");
+    const user3 = nuevaInstancia.createUser("usuario1", "email1", "password3");
+    const user4 = nuevaInstancia.createUser("usuario4", "email1", "password4");
 
     // addUser
     nuevaInstancia.addUser(user1);
@@ -71,13 +72,19 @@ function testVideoSystem() {
     try {
         nuevaInstancia.addUser("notuser");
     } catch (error) {
-        console.error(error.message);
+        console.error("Error addUser tipo: ", error.message);
     }
 
     try {
         nuevaInstancia.addUser(user3);
     } catch (error) {
-        console.error(error.message);
+        console.error("Error addUser ya existe: ", error.message);
+    }
+
+    try {
+        nuevaInstancia.addUser(user4);
+    } catch (error) {
+        console.error("Error addUser ya existe: ", error.message);
     }
 
     // removeUser

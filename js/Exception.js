@@ -42,3 +42,9 @@ export class NotRegisteredException extends Exception {
         super(`Error: el/la ${expectedType} no existe.`);
     }
 }
+
+export class RegisteredEmailException extends Exception {
+    constructor(expectedType) {
+        super(`Error: el ${expectedType} ya existe.`);
+    }
+}

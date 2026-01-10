@@ -42,7 +42,9 @@ class VideoSystem {
     this.#name = name;
 
     // Colección por defecto
-    this.#categories.set(this.#defaultCategory, new Set());
+    this.#categories.set(this.#defaultCategory.name, {
+      category: this.#defaultCategory, productions: new Map()
+    });
 
     VideoSystem.#instance = this;
   }
@@ -88,11 +90,14 @@ class VideoSystem {
         throw new InvalidTypeException("Category");
       }
       // Ya registrado
-      if (this.#categories.has(cat)) {
+      if (this.#categories.has(cat.name)) {
         throw new RegisteredException("categoria");
       }
       // Añadir categoría
-      this.#categories.set(cat, new Set());
+      this.#categories.set(cat.name, {
+        category: cat,
+        productions: new Map()
+      });
     }
     //Number con el nº de elementos
     return this.#categories.size;
@@ -105,17 +110,17 @@ class VideoSystem {
   removeCategory(...categories) {
     for (const cat of categories) {
       // No registrado
-      if (!this.#categories.has(cat)) {
+      if (!this.#categories.has(cat.name)) {
         throw new NotRegisteredException("categoria");
       }
       // Mover producciones a la categoría por defecto antes de eliminar
-      const productions = this.#categories.get(cat);
-      const defaultSet = this.#categories.get(this.#defaultCategory);
-      for (const prod of productions) {
-        defaultSet.add(prod);
+      const productions = this.#categories.get(cat.name);
+      const defaultSet = this.#categories.get(this.#defaultCategory.name);
+      for (const prod of productions.productions.values()) {
+        defaultSet.productions.set(prod.title, prod);
       }
       // Eliminar categoría
-      this.#categories.delete(cat)
+      this.#categories.delete(cat.name)
     }
     // Number con el nº de elementos
     return this.#categories.size;
@@ -239,15 +244,14 @@ class VideoSystem {
         throw new InvalidTypeException("Person");
       }
       // Ya registrado
-      for (const act of this.#actors.keys()) {
-        if (act.name === actor.name &&
-          act.lastname1 === actor.lastname1 &&
-          act.lastname2 === actor.lastname2) {
-          throw new RegisteredException("actor");
-        }
+      if (this.#actors.has(actor.name)) {
+        throw new RegisteredException("actor");
       }
       // Añadir categoría
-      this.#actors.set(actor, new Set());
+      this.#actors.set(actor.name, {
+        actor,
+        productions: new Map()
+      });
     }
     //Number con el nº de elementos
     return this.#actors.size;
@@ -263,11 +267,11 @@ class VideoSystem {
         throw new InvalidTypeException("Person");
       }
       // No registrado
-      if (!this.#actors.has(actor)) {
+      if (!this.#actors.has(actor.name)) {
         throw new NotRegisteredException("actor");
       }
       // Eliminar actor
-      this.#actors.delete(actor)
+      this.#actors.delete(actor.name)
     }
     // Number con el nº de elementos
     return this.#actors.size;
@@ -291,15 +295,19 @@ class VideoSystem {
         throw new InvalidTypeException("Person");
       }
       // Ya registrado
-      if (this.#directors.has(director)) {
+      if (this.#directors.has(director.name)) {
         throw new RegisteredException("director");
       }
       // Añadir director
-      this.#directors.set(director, new Set());
+      this.#directors.set(director.name, {
+        director,
+        productions: new Map()
+      });
     }
     //Number con el nº de elementos
     return this.#directors.size;
   }
+
   /**
    * Elimina un director del sistema
    */
@@ -310,11 +318,11 @@ class VideoSystem {
         throw new InvalidTypeException("Person");
       }
       // No registrado
-      if (!this.#directors.has(director)) {
+      if (!this.#directors.has(director.name)) {
         throw new NotRegisteredException("director");
       }
       // Eliminar director
-      this.#directors.delete(director)
+      this.#directors.delete(director.name)
     }
     // Number con el nº de elementos
     return this.#directors.size;
@@ -330,9 +338,10 @@ class VideoSystem {
       throw new NotNullValueException("category");
     }
     // Si la categoría no existe, se añade al sistema 
-    if (!this.#categories.has(category)) {
+    if (!this.#categories.has(category.name)) {
       this.addCategory(category);
     }
+    const storedCategory = this.#categories.get(category.name);
     for (const production of productions) {
       // Production null
       if (production === null) {
@@ -343,10 +352,10 @@ class VideoSystem {
         this.addProduction(production);
       }
       // Asignar la producción a la categoría 
-      this.#categories.get(category).add(production);
+      storedCategory.productions.set(production.title, production);
     }
     // Number con el nº total de producciones asignadas a la categoría
-    return this.#categories.get(category).size;
+    return storedCategory.productions.size;
   }
 
   /**
@@ -357,17 +366,19 @@ class VideoSystem {
     if (category === null) {
       throw new NotNullValueException("category");
     }
+    const storedCategory = this.#categories.get(category.name);
     for (const production of productions) {
       // Production null
       if (production === null) {
         throw new NotNullValueException("production");
       }
       // Eliminar la producción de la categoría 
-      this.#categories.get(category).delete(production);
+      storedCategory.productions.delete(production.title);
     }
     // Number con el nº total de producciones asignadas a la categoría
-    return this.#categories.get(category).size;
+    return storedCategory.productions.size;
   }
+
 
   /**
    * Asigna uno más producciones a un director
@@ -379,7 +390,7 @@ class VideoSystem {
       throw new NotNullValueException("director");
     }
     // Si el director no existe, se añade al sistema 
-    if (!this.#directors.has(director)) {
+    if (!this.#directors.has(director.name)) {
       this.addDirector(director);
     }
     for (const production of productions) {
@@ -392,10 +403,10 @@ class VideoSystem {
         this.addProduction(production);
       }
       // Asignar la producción al director 
-      this.#directors.get(director).add(production);
+      this.#directors.get(director.name).productions.set(production.title, production);
     }
     // Number con el nº total de producciones asignadas al director
-    return this.#directors.get(director).size;
+    return this.#directors.get(director.name).productions.size;
   }
 
   /**
@@ -412,25 +423,26 @@ class VideoSystem {
         throw new NotNullValueException("production");
       }
       // Eliminar la producción del director 
-      this.#directors.get(director).delete(production);
+      this.#directors.get(director.name).productions.delete(production.title);
     }
     // Number con el nº total de producciones asignadas al director
-    return this.#directors.get(director).size;
+    return this.#directors.get(director.name).productions.size;
   }
 
   /**
-    * Asigna uno más producciones a un actor
-    * Si el actor o el objeto Production no existen se añaden al sistema
-    */
+   * Asigna uno más producciones a un actor
+   * Si el actor o el objeto Production no existen se añaden al sistema
+   */
   assignActor(actor, ...productions) {
     // Actor null
     if (actor === null) {
       throw new NotNullValueException("actor");
     }
     // Si el actor no existe, se añade al sistema 
-    if (!this.#actors.has(actor)) {
+    if (!this.#actors.has(actor.name)) {
       this.addActor(actor);
     }
+    const storedActor = this.#actors.get(actor.name);
     for (const production of productions) {
       // Production null
       if (production === null) {
@@ -440,31 +452,32 @@ class VideoSystem {
       if (!this.#productions.has(production)) {
         this.addProduction(production);
       }
-      // Asignar la producción al actor 
-      this.#actors.get(actor).add(production);
+      // Asignar la producción al actor
+      storedActor.productions.set(production.title, production);
     }
     // Number con el nº total de producciones asignadas al actor
-    return this.#actors.get(actor).size;
+    return storedActor.productions.size;
   }
 
   /**
-   * Desasigna una o más producciones de un actor
-   */
+ * Desasigna una o más producciones de un actor
+ */
   deassignActor(actor, ...productions) {
     // Actor null
     if (actor === null) {
       throw new NotNullValueException("actor");
     }
+    const storedActor = this.#actors.get(actor.name);
     for (const production of productions) {
       // Production null
       if (production === null) {
         throw new NotNullValueException("production");
       }
       // Eliminar la producción del actor 
-      this.#actors.get(actor).delete(production);
+      storedActor.productions.delete(production.title);
     }
     // Number con el nº total de producciones asignadas al actor
-    return this.#actors.get(actor).size;
+    return storedActor.productions.size;
   }
 
   /**
@@ -477,14 +490,13 @@ class VideoSystem {
       throw new NotNullValueException("production");
     }
     // Actores de la colección
-    const actors = this.#actors;
+    const storedActors = this.#actors.values();
     return {
       *[Symbol.iterator]() {
-        for (const actor of actors.keys()) {
-          const productions = actors.get(actor);
+        for (const actor of storedActors) {
           // Si el actor está en la producción, se devuelve
-          if (productions.has(production)) {
-            yield actor;
+          if (actor.productions.has(production.title)) {
+            yield actor.actor;
           }
         }
       }
@@ -500,12 +512,11 @@ class VideoSystem {
       throw new NotNullValueException("director");
     }
     // Directores de la colección
-    const directors = this.#directors;
+    const storedDirectors = this.#directors.get(director.name);
     return {
       *[Symbol.iterator]() {
         // Si la producción tiene director asignado, se devuelve
-        const productions = directors.get(director);
-        for (const production of productions) {
+        for (const production of storedDirectors.productions.values()) {
           yield production;
         }
       }
@@ -522,12 +533,11 @@ class VideoSystem {
       throw new NotNullValueException("actor");
     }
     // Actores de la colección
-    const actors = this.#actors;
+    const storedActors = this.#actors.get(actor.name);
     return {
       *[Symbol.iterator]() {
         // Si la producción tiene actor asignado, se devuelve
-        const productions = actors.get(actor);
-        for (const production of productions) {
+        for (const production of storedActors.productions.values()) {
           yield production;
         }
       }
@@ -543,12 +553,11 @@ class VideoSystem {
       throw new NotNullValueException("category");
     }
     // Categorías de la colección
-    const categories = this.#categories;
+    const storedCategories = this.#categories.get(category.name);
     return {
       *[Symbol.iterator]() {
         // Si la producción tiene una categoría asignada, se devuelve
-        const productions = categories.get(category);
-        for (const production of productions) {
+        for (const production of storedCategories.productions.values()) {
           yield production;
         }
       }
@@ -611,13 +620,13 @@ class VideoSystem {
       throw new NotNullValueException("category");
     }
     // Si la categoría no existe 
-    if (!this.#categories.has(category)) {
+    if (!this.#categories.has(category.name)) {
       throw new NotRegisteredException("categoria");
     }
     // Obtener las producciones de la categoría
-    const productions = this.#categories.get(category);
+    const storedCategory = this.#categories.get(category.name);
     // Filtrar en base a la función
-    let result = Array.from(productions).filter(filterFn);
+    let result = Array.from(storedCategory.productions.values()).filter(filterFn);
     // Ordernar en base a la función
     result.sort(sortFn);
     // Iterador
