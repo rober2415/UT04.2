@@ -2,9 +2,6 @@
 
 import { VideoSystem } from "./VideoSystem.js";
 import { Category } from "./Category.js";
-import { User } from "./User.js";
-import { Production } from "./Production.js";
-import { Person } from "./Person.js";
 
 export function testApp() {
     // Instanacia singleton
@@ -55,8 +52,9 @@ export function testApp() {
     }
 
     // addUser
-    const user1 = new User("usuario1", "email1", "password1");
-    const user2 = new User("usuario2", "email2", "password2");
+    const user1 = nuevaInstancia.createUser("usuario1", "email1", "password1");
+    const user2 = nuevaInstancia.createUser("usuario2", "email2", "password2");
+    const user3 = nuevaInstancia.createUser("usuario1", "email1", "password1");
     nuevaInstancia.addUser(user1);
     nuevaInstancia.addUser(user2);
 
@@ -73,7 +71,7 @@ export function testApp() {
     }
 
     try {
-        nuevaInstancia.addUser(user1);
+        nuevaInstancia.addUser(user3);
     } catch (error) {
         console.error(error.message);
     }

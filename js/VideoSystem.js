@@ -186,7 +186,7 @@ class VideoSystem {
         throw new InvalidTypeException("Production");
       }
       // Ya registrado     
-      for (const product of this.#productions.keys()) {
+      for (const product of this.#productions.values()) {
         if (product.title === production.title &&
           product.nationality === production.nationality &&
           product.publication === production.publication) {
@@ -568,6 +568,14 @@ class VideoSystem {
    */
   createProduction(title, nationality, publication, synopsis, image) {
     return new Production(title, nationality, publication, synopsis, image);
+  }
+
+  /**
+   * Devuelve un objeto User si está registrado, o crea un nuevo
+   * Si es nuevo NO lo añade al manager
+   */
+  createUser(username, email, password) {
+    return new User(username, email, password);
   }
 
 }
