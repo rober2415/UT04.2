@@ -573,6 +573,12 @@ class VideoSystem {
    * Si es nuevo NO lo añade al manager
    */
   createPerson(name, lastname1, lastname2, born, picture) {
+    if (this.#actors.has(name)) {
+      return this.#actors.get(name).actor;
+    }
+    if (this.#directors.has(name)) {
+      return this.#directors.get(name).director;
+    }
     return new Person(name, lastname1, lastname2, born, picture);
   }
 
@@ -581,6 +587,11 @@ class VideoSystem {
    * Si es nuevo NO lo añade al manager
    */
   createProduction(title, nationality, publication, synopsis, image) {
+    for (const prod of this.#productions) {
+      if (prod.title === title) {
+        return prod;
+      }
+    }
     return new Production(title, nationality, publication, synopsis, image);
   }
 
@@ -589,6 +600,11 @@ class VideoSystem {
    * Si es nuevo NO lo añade al manager
    */
   createUser(username, email, password) {
+    for (const user of this.#users) {
+      if (user.username === username || user.email === email) {
+        return user;
+      }
+    }
     return new User(username, email, password);
   }
 
@@ -597,6 +613,9 @@ class VideoSystem {
    * Si es nuevo NO lo añade al manager
    */
   createCategory(name, description) {
+    if (this.#categories.has(name)) {
+      return this.#categories.get(name).category;
+    }
     return new Category(name, description);
   }
 
