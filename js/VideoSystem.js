@@ -78,7 +78,7 @@ class VideoSystem {
    * Devuelve un iterador que permite recorrer las categorías del sistema
    */
   get categories() {
-    return this.#categories.keys();
+    return this.#categories.values();
   }
 
   /**
