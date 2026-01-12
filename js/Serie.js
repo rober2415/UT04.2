@@ -34,5 +34,9 @@ export class Serie extends Production {
     set seasons(seasons) {
         this.#seasons = seasons;
     }
+
+    toString() {
+        return `${super.toString()}, ${this.#resources},${this.locations}, ${this.#seasons}`;
+    }
 }
 

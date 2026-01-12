@@ -27,6 +27,6 @@ export class Movie extends Production {
     }
 
     toString() {
-        return `${this.#resource}, ${this.#locations}`;
+        return `${super.toString()},${this.#resource}, ${this.#locations}`;
     }
 }
